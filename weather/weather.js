@@ -1,6 +1,6 @@
 var map = L.map('map').setView([38, -95], 4);
 var basemapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-var basemap = L.tileLayer(basemapUrl).addTo(map);
+var basemap = L.tileLayer(https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}).addTo(map);
 var radarUrl = 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi';
 var radarDisplayOptions = {
   layers: 'nexrad-n0r-900913',
@@ -14,6 +14,8 @@ $.getJSON(weatherAlertsUrl, function(data) {
   style: function(feature){
    var alertColor = 'orange';
    if (feature.properties.severity === 'Severe') alertColor = 'red';
+   if (feature.properties.severity === 'Extreme') alertColor = 'darkred';
+   if (feature.properties.severity === 'Minor') alertColor = 'yellow';
    return { color: alertColor };
   },
   onEachFeature: function(feature, layer) {
